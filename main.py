@@ -106,3 +106,10 @@ while True:
     except OSError as e:
         cl.close()
         print('关闭连接')
+# 添加排序
+def bubbleSort(arr):
+    for i in range(1, len(arr)):
+        for j in range(0, len(arr)-i):
+            if arr[j] > arr[j+1]:
+                arr[j], arr[j + 1] = arr[j + 1], arr[j]
+    return arr
