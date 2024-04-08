@@ -30,6 +30,8 @@ _ADV_TYPE_NAME = const(0x09)
 _ADV_TYPE_UUID16_COMPLETE = const(0x3)
 _ADV_TYPE_UUID32_COMPLETE = const(0x5)
 _ADV_TYPE_UUID128_COMPLETE = const(0x7)
+_ADV_TYPE_UUID256_COMPLETE = const(0x8)
+_ADV_TYPE_UUID512_COMPLETE = const(0x9)
 _ADV_TYPE_UUID16_MORE = const(0x2)
 _ADV_TYPE_UUID32_MORE = const(0x4)
 _ADV_TYPE_UUID128_MORE = const(0x6)
@@ -61,6 +63,10 @@ def advertising_payload(limited_disc=False, br_edr=False, name=None, services=No
                 _append(_ADV_TYPE_UUID32_COMPLETE, b)
             elif len(b) == 16:
                 _append(_ADV_TYPE_UUID128_COMPLETE, b)
+            elif len(b) == 32:
+                _append(_ADV_TYPE_UUID256_COMPLETE, b)
+            elif len(b) == 64:
+                _append(_ADV_TYPE_UUID512_COMPLETE, b)
 
     # See org.bluetooth.characteristic.gap.appearance.xml
     if appearance:
@@ -103,7 +109,7 @@ def demo():
     print(payload)
     print(decode_name(payload))
     print(decode_services(payload))
-
+    print('start')
 
 if __name__ == "__main__":
     demo()
