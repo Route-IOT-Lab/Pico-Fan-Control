@@ -79,4 +79,12 @@ class BLETools(object):
 
 		assert isinstance(addr, bytes) and len(addr) == 6, ValueError("mac address value error")
 		return ":".join(['%02X' % byte for byte in addr])
+	 # speed: 0 ~ 100
+        def set_speed(self, speed: int, direction: int):
+	        if direction == FORWARD:
+	            self.pwm_f.duty_u16(int(_FULL_DUTY * (speed / 100)))
+	            self.pwm_b.duty_u16(0)
+	        else:
+	            self.pwm_f.duty_u16(0)
+	            self.pwm_b.duty_u16(int(_FULL_DUTY * (speed / 100)))
 	
